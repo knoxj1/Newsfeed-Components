@@ -93,22 +93,68 @@ const data = [
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
-
     {three separate paragraph elements}
-
     <span class='expandButton'></span>
   </div>
-
   Hint: You will need to use createElement more than once here!
-
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
-
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
   Step 3: return the entire component.
-
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
-
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
-
 */
+
+window.addEventListener('load', event => {
+
+const articles = document.querySelector('.articles');
+
+// data.forEach(info => {
+//   articles.appendChild(createArticle(info.title, info.date, info.firstParagraph, info.secondParagraph, info.thirdParagraph ))
+// });
+
+function createArticle(info){
+
+  const article = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const firstParagraph = document.createElement('p');
+  const secondParagraph = document.createElement('p');
+  const thirdParagraph = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.classList.add('article');
+  date.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  // expandButton.addEventListener('toggle', (event) => {
+  // expandButton.classList.toggle('article-open');
+  //   });
+
+  expandButton.addEventListener('click', (event) => {
+  articleOpen.classList.toggle('article-open');
+  });
+
+  title.textContent = info.title;
+  date.textContent = info.date;  
+  firstParagraph.textContent = info.firstParagraph;
+  secondParagraph.textContent = info.secondParagraph;
+  thirdParagraph.textContent = info.thirdParagraph;
+
+
+  article.appendChild(title);
+  article.appendChild(date);
+  article.appendChild(firstParagraph);
+  article.appendChild(secondParagraph);
+  article.appendChild(thirdParagraph);
+  article.appendChild(expandButton);
+
+ 
+  return article;
+
+
+}
+
+data.forEach(currentData => {
+  articles.appendChild(createArticle(currentData));
+});
+})
